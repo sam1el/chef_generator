@@ -31,7 +31,7 @@ cookbook_file "#{repo_dir}/chefignore" do
   action :create_if_missing
 end
 
-directories_to_create = %w( cookbooks habitat )
+directories_to_create = %w( cookbooks )
 
 directories_to_create += if context.use_policy
                            %w( policyfiles )
@@ -72,7 +72,10 @@ if context.have_git
 end
 
 # Effortless
-if node['os'] == 'linux'
+directory "#{repo_dir}/habitat" do
+  action :create
+end
+
 template "#{repo_dir}/habitat/plan.sh" do
   source "repo/plan.sh.erb"
   helpers(ChefDK::Generator::TemplateHelper)
@@ -83,19 +86,6 @@ template "#{repo_dir}/habitat/default.toml" do
   source "repo/lin.default.toml.erb"
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
-end
-elsif node['os'] == 'windows'
-template "#{repo_dir}/habitat/plan.ps1" do
-  source "repo/plan.ps1.erb"
-  helpers(ChefDK::Generator::TemplateHelper)
-  action :create_if_missing
-end
-
-template "#{repo_dir}/habitat/default.toml" do
-  source "repo/win.default.toml.erb"
-  helpers(ChefDK::Generator::TemplateHelper)
-  action :create_if_missing
- end
 end
 
 template "#{repo_dir}/policyfiles/#{appname}.rb" do
@@ -119,7 +109,7 @@ directory "#{repo_dir}/habitat/config" do
 end
 
 # InSpec
-directory "#{repo_dir}/test/integration/default" do
+directory "#{repo_dir}/test/integration/#{appname}" do
   recursive true
 end
 
