@@ -1,0 +1,19 @@
+name '<%= cookbook_name %>'
+maintainer 'Jeff Brimager'
+maintainer_email 'jbrimager@chef.io'
+license 'Apache-2.0'
+description 'Installs/Configures <%= cookbook_name %>'
+long_description 'Installs/Configures <%= cookbook_name %>'
+version '0.1.0'
+chef_version '>= 14.0'
+
+# # Add dependencies here.
+# depends 'cookbook_name'
+
+# Remove unwanted OS if multiple are supported
+%w( aix amazon centos fedora freebsd debian oracle mac_os_x redhat suse opensuse opensuseleap ubuntu windows zlinux ).each do |os|
+    supports os
+  end
+
+# # Use this if only one os is supported
+# supports 'redhat'

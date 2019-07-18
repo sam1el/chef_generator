@@ -1,0 +1,5 @@
+name             'code_generator_wrapper'
+description      'Wrapper for custom code generator cookbook for use with ChefDK'
+long_description 'Wrapper for custom code generator cookbook for use with ChefDK'
+version          '0.1.0'
+depends 'code_generator', '0.1.0'
